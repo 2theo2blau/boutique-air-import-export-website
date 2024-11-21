@@ -19,30 +19,56 @@
 
         /* Body Styles */
         body {
-            background: linear-gradient(135deg, #0077be, #00ccff, #00ffcc);
+            background: linear-gradient(135deg, #0077be, #00ccff, #00ffcc, #ff77a9, #d4af37);
             color: #fff;
             font-family: 'Playfair Display', serif;
             overflow-x: hidden;
             cursor: url('https://i.imgur.com/TQqjkI4.png'), auto; /* Neon middle finger cursor */
             position: relative;
+            animation: backgroundFlow 60s ease-in-out infinite;
         }
 
-        /* Background Particle Effect */
+        @keyframes backgroundFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle Float Effect */
         .particle-background {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/3XHxRng.png') repeat;
-            opacity: 0.1;
-            z-index: -1;
-            animation: moveBackground 60s linear infinite;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: particleMove 120s linear infinite;
+            z-index: -3;
+            opacity: 0.3;
         }
 
-        @keyframes moveBackground {
-            from { background-position: 0 0; }
-            to { background-position: 10000px 5000px; }
+        @keyframes particleMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
+        /* Fluid Wave Animation */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: waveMove 10s linear infinite;
+            z-index: -2;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
+            100% { transform: translateX(-100%) rotate(0deg); }
         }
 
         /* Navigation Bar */
@@ -113,6 +139,7 @@
             position: relative;
             z-index: 1;
             animation: pulse 3s infinite;
+            max-width: 800px;
         }
 
         @keyframes pulse {
@@ -130,8 +157,8 @@
 
         .hero p {
             font-size: 24px;
-            max-width: 600px;
-            margin: 0 auto 40px;
+            margin-bottom: 40px;
+            color: #e0e0e0;
             animation: textSlide 5s infinite;
         }
 
@@ -155,6 +182,7 @@
             border-radius: 5px;
             transition: background 0.3s, transform 0.3s;
             display: inline-block;
+            cursor: pointer;
         }
 
         .hero a:hover {
@@ -162,13 +190,14 @@
             transform: translateY(-5px);
         }
 
-        /* Brain Animation */
+        /* Floating Brain Animation */
         .brain-animation {
             position: absolute;
             bottom: 20px;
             right: 20px;
             width: 150px;
             animation: brainMove 10s infinite alternate;
+            opacity: 0.8;
         }
 
         @keyframes brainMove {
@@ -179,16 +208,18 @@
 
         /* Products Section */
         .products {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #0077be, #00ccff, #00ffcc);
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(0, 119, 190, 0.8), rgba(0, 204, 255, 0.8), rgba(0, 255, 204, 0.8), rgba(255, 119, 169, 0.8), rgba(212, 175, 55, 0.8));
             text-align: center;
+            position: relative;
         }
 
         .products h2 {
             font-size: 40px;
             margin-bottom: 50px;
-            color: #d4af37;
+            color: #fff;
             position: relative;
+            z-index: 1;
         }
 
         .products h2::before, .products h2::after {
@@ -202,13 +233,11 @@
         }
 
         .products h2::before {
-            left: 50%;
-            margin-left: -100px;
+            left: 25%;
         }
 
         .products h2::after {
-            right: 50%;
-            margin-right: -100px;
+            right: 25%;
         }
 
         .product-list {
@@ -221,10 +250,10 @@
 
         .product {
             width: 300px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 20px;
             border-radius: 10px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
             transform-style: preserve-3d;
@@ -234,6 +263,7 @@
 
         .product:hover {
             transform: rotateY(180deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
         }
 
         .product img {
@@ -253,6 +283,7 @@
         .product p {
             font-size: 16px;
             margin-bottom: 20px;
+            color: #e0e0e0;
         }
 
         .product a {
@@ -263,6 +294,7 @@
             border-radius: 5px;
             transition: background 0.3s, transform 0.3s;
             display: inline-block;
+            cursor: pointer;
         }
 
         .product a:hover {
@@ -277,7 +309,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 20px;
             border-radius: 10px;
             transform: rotateY(180deg);
@@ -288,84 +320,250 @@
             justify-content: center;
             text-align: center;
             backdrop-filter: blur(10px);
+            opacity: 0.9;
         }
 
-        /* Call to Action Section */
-        .cta {
+        /* Upcoming Launches Section */
+        .upcoming-launches {
             padding: 100px 20px;
-            background: url('https://i.imgur.com/u8fLQjX.jpg') no-repeat center center/cover;
-            position: relative;
+            background: rgba(0, 0, 0, 0.8);
             text-align: center;
-            animation: shake 20s infinite;
+            position: relative;
+            color: #fff;
         }
 
-        .cta::after {
+        .upcoming-launches h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            color: #d4af37;
+            position: relative;
+        }
+
+        .upcoming-launches h2::before, .upcoming-launches h2::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
+            width: 50px;
+            height: 2px;
+            background: #d4af37;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        .cta-content {
+        .upcoming-launches h2::before {
+            left: 25%;
+        }
+
+        .upcoming-launches h2::after {
+            right: 25%;
+        }
+
+        .launch-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .launch-item {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .launch-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .launch-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
             color: #fff;
-            transform: translateY(0);
-            animation: expand 10s infinite alternate;
         }
 
-        @keyframes expand {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.02); }
-        }
-
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
-        }
-
-        .cta h2 {
-            font-size: 36px;
+        .launch-item p {
+            font-size: 16px;
             margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .launch-item .countdown {
+            font-size: 18px;
             color: #d4af37;
-            animation: neonGlow 2s infinite alternate;
+            animation: countdownBlink 1s step-end infinite;
         }
 
-        .cta p {
-            font-size: 20px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            animation: textFlicker 3s infinite;
-        }
-
-        @keyframes textFlicker {
-            0%, 100% { opacity: 1; }
+        @keyframes countdownBlink {
+            from, to { opacity: 1; }
             50% { opacity: 0.5; }
         }
 
-        .cta a {
+        /* Exclusive Offers Section */
+        .exclusive-offers {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(255, 119, 169, 0.8), rgba(212, 175, 55, 0.8));
+            text-align: center;
+            position: relative;
+        }
+
+        .exclusive-offers h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .exclusive-offers p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #e0e0e0;
+            animation: textFadeIn 6s ease-in-out infinite;
+        }
+
+        @keyframes textFadeIn {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .exclusive-offers .offer-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .offer-item {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .offer-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .offer-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #d4af37;
+        }
+
+        .offer-item p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .offer-item a {
             text-decoration: none;
             background: #d4af37;
             color: #000;
-            padding: 15px 30px;
-            font-size: 20px;
+            padding: 10px 20px;
             border-radius: 5px;
             transition: background 0.3s, transform 0.3s;
             display: inline-block;
+            cursor: pointer;
         }
 
-        .cta a:hover {
+        .offer-item a:hover {
             background: #fff;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
+        }
+
+        /* Upcoming Exclusive Launches Section */
+        .exclusive-launches {
+            padding: 100px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            position: relative;
+            color: #fff;
+        }
+
+        .exclusive-launches h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            color: #d4af37;
+            position: relative;
+        }
+
+        .exclusive-launches h2::before, .exclusive-launches h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #d4af37;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .exclusive-launches h2::before {
+            left: 25%;
+        }
+
+        .exclusive-launches h2::after {
+            right: 25%;
+        }
+
+        .launch-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .exclusive-launch-item {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .exclusive-launch-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .exclusive-launch-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .exclusive-launch-item p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .exclusive-launch-item a {
+            text-decoration: none;
+            background: #d4af37;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .exclusive-launch-item a:hover {
+            background: #fff;
+            transform: translateY(-3px);
         }
 
         /* Footer */
@@ -375,6 +573,7 @@
             text-align: center;
             color: #666666;
             backdrop-filter: blur(10px);
+            position: relative;
         }
 
         footer p {
@@ -410,7 +609,7 @@
             opacity: 0.2;
             pointer-events: none;
             animation: brainPulse 5s infinite;
-            z-index: -2;
+            z-index: -4;
         }
 
         @keyframes brainPulse {
@@ -418,9 +617,32 @@
             50% { opacity: 0.5; transform: translateX(-50%) scale(1.1); }
         }
 
+        /* Additional Animations for Fluid Dynamics */
+        .fluid-motion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: fluidRotate 60s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes fluidRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
         /* Media Queries */
         @media (max-width: 768px) {
-            .products .product-list {
+            .products .product-list,
+            .upcoming-launches .launch-list,
+            .exclusive-offers .offer-list,
+            .exclusive-launches .launch-list {
                 flex-direction: column;
                 align-items: center;
             }
@@ -437,13 +659,24 @@
                 font-size: 18px;
             }
 
-            .products h2 {
+            .products h2,
+            .upcoming-launches h2,
+            .exclusive-offers h2,
+            .exclusive-launches h2 {
                 font-size: 32px;
             }
 
             .cta h2 {
                 font-size: 28px;
             }
+        }
+
+        /* Disclaimer */
+        footer .disclaimer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
         }
     
 
@@ -465,30 +698,56 @@
 
         /* Body Styles */
         body {
-            background: linear-gradient(135deg, #0077be, #00ccff, #00ffcc);
+            background: linear-gradient(135deg, #0077be, #00ccff, #00ffcc, #ff77a9, #d4af37);
             color: #fff;
             font-family: 'Playfair Display', serif;
             overflow-x: hidden;
             cursor: url('https://i.imgur.com/TQqjkI4.png'), auto; /* Neon middle finger cursor */
             position: relative;
+            animation: backgroundFlow 60s ease-in-out infinite;
         }
 
-        /* Background Particle Effect */
+        @keyframes backgroundFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle Float Effect */
         .particle-background {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/3XHxRng.png') repeat;
-            opacity: 0.1;
-            z-index: -1;
-            animation: moveBackground 60s linear infinite;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: particleMove 120s linear infinite;
+            z-index: -3;
+            opacity: 0.3;
         }
 
-        @keyframes moveBackground {
-            from { background-position: 0 0; }
-            to { background-position: 10000px 5000px; }
+        @keyframes particleMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
+        /* Fluid Wave Animation */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: waveMove 10s linear infinite;
+            z-index: -2;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
+            100% { transform: translateX(-100%) rotate(0deg); }
         }
 
         /* Navigation Bar */
@@ -559,6 +818,7 @@
             position: relative;
             z-index: 1;
             animation: pulse 3s infinite;
+            max-width: 800px;
         }
 
         @keyframes pulse {
@@ -576,8 +836,8 @@
 
         .hero p {
             font-size: 24px;
-            max-width: 600px;
-            margin: 0 auto 40px;
+            margin-bottom: 40px;
+            color: #e0e0e0;
             animation: textSlide 5s infinite;
         }
 
@@ -601,6 +861,7 @@
             border-radius: 5px;
             transition: background 0.3s, transform 0.3s;
             display: inline-block;
+            cursor: pointer;
         }
 
         .hero a:hover {
@@ -608,13 +869,14 @@
             transform: translateY(-5px);
         }
 
-        /* Brain Animation */
+        /* Floating Brain Animation */
         .brain-animation {
             position: absolute;
             bottom: 20px;
             right: 20px;
             width: 150px;
             animation: brainMove 10s infinite alternate;
+            opacity: 0.8;
         }
 
         @keyframes brainMove {
@@ -625,16 +887,18 @@
 
         /* Products Section */
         .products {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #0077be, #00ccff, #00ffcc);
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(0, 119, 190, 0.8), rgba(0, 204, 255, 0.8), rgba(0, 255, 204, 0.8), rgba(255, 119, 169, 0.8), rgba(212, 175, 55, 0.8));
             text-align: center;
+            position: relative;
         }
 
         .products h2 {
             font-size: 40px;
             margin-bottom: 50px;
-            color: #d4af37;
+            color: #fff;
             position: relative;
+            z-index: 1;
         }
 
         .products h2::before, .products h2::after {
@@ -648,13 +912,11 @@
         }
 
         .products h2::before {
-            left: 50%;
-            margin-left: -100px;
+            left: 25%;
         }
 
         .products h2::after {
-            right: 50%;
-            margin-right: -100px;
+            right: 25%;
         }
 
         .product-list {
@@ -667,10 +929,10 @@
 
         .product {
             width: 300px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 20px;
             border-radius: 10px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
             transform-style: preserve-3d;
@@ -680,6 +942,7 @@
 
         .product:hover {
             transform: rotateY(180deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
         }
 
         .product img {
@@ -699,6 +962,7 @@
         .product p {
             font-size: 16px;
             margin-bottom: 20px;
+            color: #e0e0e0;
         }
 
         .product a {
@@ -709,6 +973,7 @@
             border-radius: 5px;
             transition: background 0.3s, transform 0.3s;
             display: inline-block;
+            cursor: pointer;
         }
 
         .product a:hover {
@@ -723,7 +988,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 20px;
             border-radius: 10px;
             transform: rotateY(180deg);
@@ -734,84 +999,250 @@
             justify-content: center;
             text-align: center;
             backdrop-filter: blur(10px);
+            opacity: 0.9;
         }
 
-        /* Call to Action Section */
-        .cta {
+        /* Upcoming Launches Section */
+        .upcoming-launches {
             padding: 100px 20px;
-            background: url('https://i.imgur.com/u8fLQjX.jpg') no-repeat center center/cover;
-            position: relative;
+            background: rgba(0, 0, 0, 0.8);
             text-align: center;
-            animation: shake 20s infinite;
+            position: relative;
+            color: #fff;
         }
 
-        .cta::after {
+        .upcoming-launches h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            color: #d4af37;
+            position: relative;
+        }
+
+        .upcoming-launches h2::before, .upcoming-launches h2::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
+            width: 50px;
+            height: 2px;
+            background: #d4af37;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        .cta-content {
+        .upcoming-launches h2::before {
+            left: 25%;
+        }
+
+        .upcoming-launches h2::after {
+            right: 25%;
+        }
+
+        .launch-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .launch-item {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .launch-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .launch-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
             color: #fff;
-            transform: translateY(0);
-            animation: expand 10s infinite alternate;
         }
 
-        @keyframes expand {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.02); }
-        }
-
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
-        }
-
-        .cta h2 {
-            font-size: 36px;
+        .launch-item p {
+            font-size: 16px;
             margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .launch-item .countdown {
+            font-size: 18px;
             color: #d4af37;
-            animation: neonGlow 2s infinite alternate;
+            animation: countdownBlink 1s step-end infinite;
         }
 
-        .cta p {
-            font-size: 20px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            animation: textFlicker 3s infinite;
-        }
-
-        @keyframes textFlicker {
-            0%, 100% { opacity: 1; }
+        @keyframes countdownBlink {
+            from, to { opacity: 1; }
             50% { opacity: 0.5; }
         }
 
-        .cta a {
+        /* Exclusive Offers Section */
+        .exclusive-offers {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(255, 119, 169, 0.8), rgba(212, 175, 55, 0.8));
+            text-align: center;
+            position: relative;
+        }
+
+        .exclusive-offers h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .exclusive-offers p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #e0e0e0;
+            animation: textFadeIn 6s ease-in-out infinite;
+        }
+
+        @keyframes textFadeIn {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .exclusive-offers .offer-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .offer-item {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .offer-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .offer-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #d4af37;
+        }
+
+        .offer-item p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .offer-item a {
             text-decoration: none;
             background: #d4af37;
             color: #000;
-            padding: 15px 30px;
-            font-size: 20px;
+            padding: 10px 20px;
             border-radius: 5px;
             transition: background 0.3s, transform 0.3s;
             display: inline-block;
+            cursor: pointer;
         }
 
-        .cta a:hover {
+        .offer-item a:hover {
             background: #fff;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
+        }
+
+        /* Upcoming Exclusive Launches Section */
+        .exclusive-launches {
+            padding: 100px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            position: relative;
+            color: #fff;
+        }
+
+        .exclusive-launches h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            color: #d4af37;
+            position: relative;
+        }
+
+        .exclusive-launches h2::before, .exclusive-launches h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #d4af37;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .exclusive-launches h2::before {
+            left: 25%;
+        }
+
+        .exclusive-launches h2::after {
+            right: 25%;
+        }
+
+        .launch-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .exclusive-launch-item {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .exclusive-launch-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .exclusive-launch-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .exclusive-launch-item p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .exclusive-launch-item a {
+            text-decoration: none;
+            background: #d4af37;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .exclusive-launch-item a:hover {
+            background: #fff;
+            transform: translateY(-3px);
         }
 
         /* Footer */
@@ -821,6 +1252,7 @@
             text-align: center;
             color: #666666;
             backdrop-filter: blur(10px);
+            position: relative;
         }
 
         footer p {
@@ -856,7 +1288,7 @@
             opacity: 0.2;
             pointer-events: none;
             animation: brainPulse 5s infinite;
-            z-index: -2;
+            z-index: -4;
         }
 
         @keyframes brainPulse {
@@ -864,9 +1296,32 @@
             50% { opacity: 0.5; transform: translateX(-50%) scale(1.1); }
         }
 
+        /* Additional Animations for Fluid Dynamics */
+        .fluid-motion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: fluidRotate 60s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes fluidRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
         /* Media Queries */
         @media (max-width: 768px) {
-            .products .product-list {
+            .products .product-list,
+            .upcoming-launches .launch-list,
+            .exclusive-offers .offer-list,
+            .exclusive-launches .launch-list {
                 flex-direction: column;
                 align-items: center;
             }
@@ -883,13 +1338,24 @@
                 font-size: 18px;
             }
 
-            .products h2 {
+            .products h2,
+            .upcoming-launches h2,
+            .exclusive-offers h2,
+            .exclusive-launches h2 {
                 font-size: 32px;
             }
 
             .cta h2 {
                 font-size: 28px;
             }
+        }
+
+        /* Disclaimer */
+        footer .disclaimer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
         }
     </style>
     <!-- Icons CDN -->
@@ -902,6 +1368,9 @@
     <!-- Particle Background -->
     <div class="particle-background"></div>
 
+    <!-- Fluid Motion Overlay -->
+    <div class="fluid-motion"></div>
+
     <!-- Brain Overlay -->
     <div class="brain-overlay"></div>
 
@@ -909,7 +1378,9 @@
     <nav>
         <ul>
             <li><a href="#products">Shop</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#upcoming-launches">Upcoming Launches</a></li>
+            <li><a href="#exclusive-offers">Exclusive Offers</a></li>
+            <li><a href="#exclusive-launches">Exclusive Launches</a></li>
             <li><a href="#cta">Join Us</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -982,11 +1453,93 @@
         </div>
     </section>
 
+    <!-- Upcoming Launches Section -->
+    <section class="upcoming-launches" id="upcoming-launches">
+        <h2>Upcoming Launches</h2>
+        <div class="launch-list">
+            <!-- Launch 1 -->
+            <div class="launch-item">
+                <h3>Celestial Essence</h3>
+                <p>Exquisite air sourced from the edge of Neptune's atmosphere, capturing the mystery of the cosmos.</p>
+                <p class="countdown">Launching in: <span id="countdown1">...</span></p>
+                <a href="#">Learn More</a>
+            </div>
+            <!-- Launch 2 -->
+            <div class="launch-item">
+                <h3>Volcanic Vitality</h3>
+                <p>Intense, mineral-rich air harvested from active volcanoes, infused with the raw power of earth's core.</p>
+                <p class="countdown">Launching in: <span id="countdown2">...</span></p>
+                <a href="#">Learn More</a>
+            </div>
+            <!-- Launch 3 -->
+            <div class="launch-item">
+                <h3>Solar Flare Mist</h3>
+                <p>Radiant air illuminated by solar flares, offering an electrifying breath of warmth and energy.</p>
+                <p class="countdown">Launching in: <span id="countdown3">...</span></p>
+                <a href="#">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusive Offers Section -->
+    <section class="exclusive-offers" id="exclusive-offers">
+        <h2>Exclusive Offers</h2>
+        <p>Unlock unparalleled experiences with our limited-time exclusive air selections. These offerings transcend traditional luxury, providing an otherworldly essence to elevate your senses.</p>
+        <div class="offer-list">
+            <!-- Offer 1 -->
+            <div class="offer-item">
+                <h3>Quantum Quench</h3>
+                <p>Air manipulated at the quantum level, delivering an ethereal and timeless breath.</p>
+                <a href="#">Claim Now</a>
+            </div>
+            <!-- Offer 2 -->
+            <div class="offer-item">
+                <h3>Lunar Luminescence</h3>
+                <p>Enriched with lunar photons, this air grants a serene and illuminated breath.</p>
+                <a href="#">Claim Now</a>
+            </div>
+            <!-- Offer 3 -->
+            <div class="offer-item">
+                <h3>Stellar Symphony</h3>
+                <p>Infused with the harmonious vibrations of distant stars, offering a cosmic auditory experience.</p>
+                <a href="#">Claim Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusive Launches Section -->
+    <section class="exclusive-launches" id="exclusive-launches">
+        <h2>Exclusive Launches</h2>
+        <div class="launch-list">
+            <!-- Exclusive Launch 1 -->
+            <div class="exclusive-launch-item">
+                <h3>Galactic Gaze</h3>
+                <p>Peer into the universe with air that encapsulates the vastness of space, providing an expansive and enlightening breath.</p>
+                <p class="countdown">Available in: <span id="countdown4">...</span></p>
+                <a href="#">Reserve Now</a>
+            </div>
+            <!-- Exclusive Launch 2 -->
+            <div class="exclusive-launch-item">
+                <h3>Aurora Aura</h3>
+                <p>Embrace the mesmerizing dance of auroras captured within each breath, offering a visually stunning and tranquil experience.</p>
+                <p class="countdown">Available in: <span id="countdown5">...</span></p>
+                <a href="#">Reserve Now</a>
+            </div>
+            <!-- Exclusive Launch 3 -->
+            <div class="exclusive-launch-item">
+                <h3>Temporal Tide</h3>
+                <p>Experience the ebb and flow of time with air infused with temporal flux, providing a unique and dynamic breath.</p>
+                <p class="countdown">Available in: <span id="countdown6">...</span></p>
+                <a href="#">Reserve Now</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Call to Action Section -->
     <section class="cta" id="cta">
         <div class="cta-content">
             <h2>Join the AÉTHER Experience</h2>
-            <p>Be a part of our elite journey. Sign up for exclusive offers, events, and updates.</p>
+            <p>Be a part of our elite journey. Sign up for exclusive offers, events, and updates. Indulge in the pure, the rare, and the sublime air that only AÉTHER Atelier can provide.</p>
             <a href="#">Sign Up Now</a>
         </div>
     </section>
@@ -998,10 +1551,12 @@
             <a href="#"><i class="fab fa-instagram"></i></a>
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
+        <p class="disclaimer">Disclaimer: This website and its content are not associated with or endorsed by the Church of Scientology in any way, shape, or form.</p>
     </footer>
 
-    <!-- JavaScript for Smooth Scrolling and Interactive Features -->
+    <!-- JavaScript for Smooth Scrolling, Interactive Features, and Countdown Timers -->
     <script>
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1055,7 +1610,7 @@
             }
 
             // Generate a new random sequence for each visitor
-            const randomSequence = generateRandomSequence(16);
+            const randomSequence = generateRandomSequence(32);
 
             let index = 0;
             Tone.Transport.bpm.value = 120;
@@ -1065,6 +1620,42 @@
             }, '8n');
 
             Tone.Transport.start();
+        });
+
+        // Countdown Timers for Upcoming Launches
+        const countdowns = [
+            { id: 'countdown1', date: 'Dec 31, 2023 23:59:59 GMT+0000' },
+            { id: 'countdown2', date: 'Jan 15, 2024 12:00:00 GMT+0000' },
+            { id: 'countdown3', date: 'Feb 28, 2024 08:00:00 GMT+0000' },
+            { id: 'countdown4', date: 'Mar 15, 2024 09:00:00 GMT+0000' },
+            { id: 'countdown5', date: 'Apr 20, 2024 10:00:00 GMT+0000' },
+            { id: 'countdown6', date: 'May 10, 2024 11:00:00 GMT+0000' }
+        ];
+
+        countdowns.forEach(item => {
+            const countdownElement = document.getElementById(item.id);
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const eventDate = new Date(item.date).getTime();
+                const distance = eventDate - now;
+
+                if (distance < 0) {
+                    countdownElement.innerHTML = "LIVE!";
+                    clearInterval(interval);
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            };
+
+            const interval = setInterval(updateCountdown, 1000);
+            updateCountdown();
         });
     </script>
 </body>
@@ -1126,7 +1717,7 @@
             }
 
             // Generate a new random sequence for each visitor
-            const randomSequence = generateRandomSequence(16);
+            const randomSequence = generateRandomSequence(32);
 
             let index = 0;
             Tone.Transport.bpm.value = 120;
@@ -1136,6 +1727,42 @@
             }, '8n');
 
             Tone.Transport.start();
+        });
+
+        // Countdown Timers for Upcoming Launches
+        const countdowns = [
+            { id: 'countdown1', date: 'Dec 31, 2023 23:59:59 GMT+0000' },
+            { id: 'countdown2', date: 'Jan 15, 2024 12:00:00 GMT+0000' },
+            { id: 'countdown3', date: 'Feb 28, 2024 08:00:00 GMT+0000' },
+            { id: 'countdown4', date: 'Mar 15, 2024 09:00:00 GMT+0000' },
+            { id: 'countdown5', date: 'Apr 20, 2024 10:00:00 GMT+0000' },
+            { id: 'countdown6', date: 'May 10, 2024 11:00:00 GMT+0000' }
+        ];
+
+        countdowns.forEach(item => {
+            const countdownElement = document.getElementById(item.id);
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const eventDate = new Date(item.date).getTime();
+                const distance = eventDate - now;
+
+                if (distance < 0) {
+                    countdownElement.innerHTML = "LIVE!";
+                    clearInterval(interval);
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            };
+
+            const interval = setInterval(updateCountdown, 1000);
+            updateCountdown();
         });
     
 
